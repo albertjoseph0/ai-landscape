@@ -49,6 +49,8 @@ subprocess.check_call([
     "-i", meta, "-map_metadata", "1", "-map_chapters", "1",
     "-c:v", "libx264", "-preset", "medium", "-crf", "22", "-pix_fmt", "yuv420p",
     "-profile:v", "high", "-tune", "animation",
+    # Podcast-level loudness so it is audible over road noise.
+    "-af", "loudnorm=I=-16:TP=-1.5:LRA=11",
     "-c:a", "aac", "-b:a", "128k", "-ar", "48000", "-ac", "2",
     "-movflags", "+faststart", out])
 print(f"wrote {out} ({t/60:.1f} min)")

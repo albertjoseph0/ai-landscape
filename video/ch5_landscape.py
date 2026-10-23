@@ -100,7 +100,7 @@ class Ch5Landscape(NarratedScene):
         the last, otherwise the small ones would be invisible.""")
         data = [
             ("Anthropic", 965, "Series H, May 2026", BLUE_),
-            ("OpenAI", 852, "Mar 2026, raising ~$1.25T+", BLUE_),
+            ("OpenAI", 852, "Mar 2026", BLUE_),
             ("xAI", 250, "merged into SpaceX, 2026", BLUE_),
             ("Cursor", 60, "SpaceX all-stock deal", GREEN_),
             ("Figure", 39, "Sept 2025 round", RED_),
@@ -116,7 +116,7 @@ class Ch5Landscape(NarratedScene):
         rows = VGroup()
         for i, (name, v, note, c) in enumerate(data):
             y = 1.75 - i * 0.52
-            w = 6.0 * math.log10(v) / 3.0
+            w = 5.4 * math.log10(v) / 3.0
             lab = T(name, size=26).move_to(np.array([-3.6, y, 0]), aligned_edge=RIGHT)
             bar = Rectangle(width=w, height=0.38, fill_color=c, fill_opacity=0.9,
                             stroke_width=0).move_to(np.array([-3.35, y, 0]), aligned_edge=LEFT)
@@ -176,6 +176,7 @@ class Ch5Landscape(NarratedScene):
             card(["Neo-labs & top apps", "small, dense teams", "lab alumni founders", "fast growth"], width=4.0, color=GREEN_, size=28),
             card(["Tiny early teams", "biggest % ownership", "highest failure rate", "learn the most, fastest"], width=4.0, color=YELLOW_, size=28),
         ).arrange(RIGHT, buff=0.3).shift(DOWN * 0.3)
+        fit(cl, 13)
         self.play(Write(h))
         for c_ in cl:
             self.play(FadeIn(c_, shift=UP * 0.3), run_time=0.7)

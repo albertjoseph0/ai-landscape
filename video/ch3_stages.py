@@ -112,8 +112,8 @@ class Ch3Stages(NarratedScene):
         company says Series A, check the actual numbers, not just the letter.""")
         note = card(["AI bends the ladder", "Thinking Machines: ~$2B seed at ~$12B (2025)",
                      "frontier labs: tens of billions per round"], width=10, color=RED_, size=30)
-        note.to_edge(DOWN, buff=0.25)
-        self.play(rows.animate.set_opacity(0.35), FadeIn(note, shift=UP * 0.2))
+        note.shift(DOWN * 0.4)
+        self.play(FadeOut(rows), FadeOut(hdr), FadeIn(note, shift=UP * 0.2))
         self.done()
         self.clear_all()
 
@@ -159,12 +159,12 @@ class Ch3Stages(NarratedScene):
         h = title("What the job is like", size=52)
         self.play(Write(h))
         cards = VGroup(
-            card(["Seed", "founding engineer", "build everything", "talk to customers", "no process, no mentor"], width=3.05, color=YELLOW_, size=22, title_size=30),
-            card(["Series A", "early engineers", "first eng manager", "ship fast, find fit", "some code review"], width=3.05, color=ORANGE_, size=22, title_size=30),
-            card(["Series B", "teams specialize:", "infra · product · ML", "first SRE, security", "scaling, reliability"], width=3.05, color=GREEN_, size=22, title_size=30),
-            card(["Series C+", "levels: senior, staff", "dedicated teams", "on-call rotations", "narrower scope"], width=3.05, color=BLUE_, size=22, title_size=30),
-        ).arrange(RIGHT, buff=0.18).shift(DOWN * 0.3)
-        fit(cards, 13.2)
+            card(["Seed", "founding engineer: build everything", "talk to customers · no process, no mentor"], width=6.1, color=YELLOW_, size=26, title_size=32),
+            card(["Series A", "early engineers, first eng manager", "ship fast to find fit · some code review"], width=6.1, color=ORANGE_, size=26, title_size=32),
+            card(["Series B", "teams specialize: infra · product · ML", "first SRE + security · scaling, reliability"], width=6.1, color=GREEN_, size=26, title_size=32),
+            card(["Series C+", "levels: senior, staff · dedicated teams", "on-call rotations · narrower scope"], width=6.1, color=BLUE_, size=26, title_size=32),
+        ).arrange_in_grid(2, 2, buff=0.25).shift(DOWN * 0.45)
+        fit(cards, 13.2, 5.9)
         self.play(FadeIn(cards[0], shift=UP * 0.3))
         self.done()
 
