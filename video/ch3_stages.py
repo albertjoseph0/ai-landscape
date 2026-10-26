@@ -95,7 +95,7 @@ class Ch3Stages(NarratedScene):
         twenty five to seventy five million, valued at a hundred fifty million to a billion,
         and fifty to a hundred fifty people. Series C and beyond, the growth stage, raises
         fifty million to half a billion or more, and the company is usually worth over a
-        billion, which is where the word unicorn comes from. Teams there run from a hundred
+        billion. A private company worth over a billion dollars is nicknamed a unicorn. Teams there run from a hundred
         fifty to over a thousand. And then, an I.P.O., where the public market sets the
         price.""")
         for r in rows[1:]:

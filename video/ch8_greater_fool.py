@@ -259,7 +259,8 @@ class Ch8GreaterFool(NarratedScene):
         self.say("""So as a job seeker, you want to tell which end of that spectrum a
         company is on. Four questions do most of the work. Who pays, and would they keep
         paying if the startup's free credits or discounts ran out? Do customers renew and
-        expand, or churn after the pilot? What are the margins after paying for the models?
+        expand, or churn after the pilot? What are the margins, meaning how much of each dollar of revenue is left after
+        paying for the models?
         Some A.I. products lose money on every customer, because each request costs more in
         inference than the customer pays. And: if OpenAI or Anthropic launched this as a
         feature tomorrow, what would be left? A company with good answers is building

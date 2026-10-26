@@ -5,29 +5,6 @@ class Ch1Offer(NarratedScene):
     chapter_label = "1 · Your offer, decoded"
 
     def construct(self):
-        # ---- cold open ----
-        self.say("""Hey Albert. This is a video about one question: if you left your
-        current job for an A.I. startup, what would you actually get, and how would it
-        ever turn into money? Along the way we'll walk through how startups grow from seed
-        to I.P.O., map the A.I. startup world, talk about
-        how people really land these jobs, and take Nassim Taleb's greater fool critique
-        seriously. It's built for the car, so you don't need to watch. Everything important
-        is in the audio, and the screen is a bonus.""")
-        chap = [("1", "Your offer, decoded"), ("2", "Turning equity into cash"),
-                ("3", "Seed to IPO: the stages"), ("4", "How we got here"),
-                ("5", "The landscape today"), ("6", "Who, what, and how"),
-                ("7", "How people get hired"), ("8", "Is it a greater fool game?")]
-        rows = VGroup(*[
-            VGroup(T(n, size=40, color=YELLOW_, weight=BOLD), T(s, size=40))
-            .arrange(RIGHT, buff=0.4) for n, s in chap
-        ]).arrange(DOWN, aligned_edge=LEFT, buff=0.2).shift(DOWN * 0.45)
-        hdr = title("Eight chapters")
-        self.play(Write(hdr), run_time=1)
-        self.play(LaggedStart(*[FadeIn(r, shift=RIGHT * 0.3) for r in rows],
-                              lag_ratio=0.25), run_time=3)
-        self.done()
-        self.clear_all()
-
         self.play(FadeIn(chapter_card(1, "Your offer, decoded",
                                       "What the letter says, and what it's worth")))
         self.say("""Chapter one. Your offer, decoded.""")
@@ -162,7 +139,10 @@ class Ch1Offer(NarratedScene):
         buy a share later at a fixed price, the strike price. Your strike is two fifty.
         If the company's shares later become worth ten dollars, each option lets you pay
         two fifty for something worth ten. Your profit is the gap, seven fifty a share.
-        If the shares never get above two fifty, the options are worth nothing.""")
+        If the shares never get above two fifty, the options are worth nothing. Using that
+        right, actually paying the two fifty per share to buy the stock, is called
+        exercising, and the money comes from your own pocket. Chapter two walks through
+        exactly how that works.""")
         self.clear_all()
         axis = NumberLine(x_range=[0, 12, 2], length=10, color=DIM).shift(DOWN * 1.2)
         axis.add(*[T(str(v), size=28, color=DIM).next_to(axis.n2p(v), DOWN, buff=0.2)

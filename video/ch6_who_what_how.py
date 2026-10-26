@@ -99,7 +99,7 @@ class Ch6WhoWhatHow(NarratedScene):
 
         self.say("""Then, what you would personally work on. At an A.I. company, you
         don't need to be a researcher. A huge amount of the valuable work is regular,
-        excellent software engineering: making inference fast and cheap, building
+        excellent software engineering: making inference, meaning actually running the models for users, fast and cheap, building
         evaluation systems so you know if a change made the model better or worse,
         integrating with messy customer systems, and making agent products reliable.
         Choose a role where you'll be close to the core product and close to users, not

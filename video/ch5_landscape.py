@@ -138,8 +138,8 @@ class Ch5Landscape(NarratedScene):
 
         # ---- how valuations are set ----
         self.say("""How do companies get valued so high? Mostly as a multiple of revenue,
-        and a bet on growth. Anthropic reported a revenue run rate of about forty seven
-        billion dollars a year in May, and reports say it rose to around sixty five billion
+        and a bet on growth. Anthropic reported a revenue run rate, meaning its current monthly revenue times
+        twelve, of about forty seven billion dollars a year in May, and reports say it rose to around sixty five billion
         by summer. Divide a nine hundred sixty five billion dollar valuation by sixty five
         billion and you get about fifteen times revenue. For a normal company that's high.
         For one growing several times per year, investors think it's cheap. Smaller hot A.I.

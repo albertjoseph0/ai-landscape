@@ -177,21 +177,52 @@ class Ch2Cash(NarratedScene):
         self.clear_all()
 
         # ---- exercising ----
-        self.say("""Which brings us to exercising, step by step. Exercising means paying
-        the strike price to turn options into real shares. Practically, you log into Carta,
-        pick how many vested options to exercise, and wire the money. Ten thousand options
-        at a two fifty strike costs twenty five thousand dollars. Now you own ten thousand
-        shares of common stock, which you still can't sell on the open market.""")
-        h = title("Exercising, step by step", size=52)
-        steps = VGroup(
-            card(["1. Log in to Carta", "choose vested options"], width=3.9, color=BLUE_, size=28),
-            card(["2. Pay the strike", "10,000 × $2.50", "= $25,000"], width=3.9, color=YELLOW_, size=28),
-            card(["3. Own shares", "still private,", "still illiquid"], width=3.9, color=GREEN_, size=28),
-        ).arrange(RIGHT, buff=0.35).shift(DOWN * 0.3)
+        self.say("""Which brings us to exercising, and I want to be really concrete here,
+        because the word hides what's actually happening. Exercising an option means you
+        buy stock from your employer, with your own money. Your option is like a coupon
+        that says: you may buy one share of this company for two dollars and fifty cents.
+        The coupon by itself is not stock. To turn it into stock, you hand over two fifty
+        in real cash for every share. That money comes out of your own bank account, the
+        same checking or savings account you pay rent from. Nobody lends it to you, and it
+        doesn't come out of your paycheck automatically.""")
+        h = title("Exercising = buying the stock with your own cash", size=46)
+        coupon = card(["Option", "a coupon:", "\"buy 1 share for $2.50\""], width=3.8, color=YELLOW_, size=28)
+        bank = card(["Your bank", "account", "pays $2.50 / share"], width=3.8, color=RED_, size=28)
+        share = card(["Share", "now you actually", "own the stock"], width=3.8, color=GREEN_, size=28)
+        row = VGroup(coupon, bank, share).arrange(RIGHT, buff=0.75).shift(DOWN * 0.3)
+        ar1 = Arrow(coupon.get_right(), bank.get_left(), buff=0.1, color=DIM)
+        ar2 = Arrow(bank.get_right(), share.get_left(), buff=0.1, color=DIM)
+        self.play(Write(h))
+        self.play(FadeIn(coupon, shift=UP * 0.2))
+        self.wait(min(10, max(0.1, self.left() / 3)))
+        self.play(GrowArrow(ar1), FadeIn(bank, shift=UP * 0.2))
+        self.wait(min(8, max(0.1, self.left() / 2)))
+        self.play(GrowArrow(ar2), FadeIn(share, shift=UP * 0.2))
+        self.done()
+        self.clear_all()
+
+        self.say("""Here's what it physically looks like. Step one: you log into Carta, or
+        whatever equity website your company uses, and open your option grant. Step two:
+        you click exercise, and choose how many of your vested options to buy. The site
+        shows you the bill: number of shares times strike price. Step three: you sign an
+        exercise agreement electronically. Step four, the real part: you send the money.
+        Usually that's a bank transfer, A.C.H. or a wire, from your bank account to the
+        company. Some companies take a check. Step five: a few days or weeks later, a stock
+        certificate shows up in Carta, in your name. You're now a shareholder.""")
+        h = title("What exercising looks like, click by click", size=46)
+        items = [("1", "Log in to Carta, open your option grant", BLUE_),
+                 ("2", "Click Exercise, pick how many vested options", BLUE_),
+                 ("3", "Sign the exercise agreement online", BLUE_),
+                 ("4", "Send the money from your bank (ACH or wire)", RED_),
+                 ("5", "Shares show up in Carta, in your name", GREEN_)]
+        steps = VGroup(*[VGroup(T(n, size=44, color=c, weight=BOLD), T(t, size=38))
+                         .arrange(RIGHT, buff=0.4) for n, t, c in items])
+        steps.arrange(DOWN, aligned_edge=LEFT, buff=0.38).shift(DOWN * 0.45)
+        fit(steps, 12.8, 5.6)
         self.play(Write(h))
         for st in steps:
-            self.play(FadeIn(st, shift=UP * 0.3), run_time=0.7)
-            self.wait(min(5, max(0.1, self.left() / 4)))
+            self.play(FadeIn(st, shift=UP * 0.3), run_time=0.6)
+            self.wait(min(8, max(0.1, self.left() / 5)))
         self.done()
         self.clear_all()
 
@@ -205,14 +236,14 @@ class Ch2Cash(NarratedScene):
         which can produce a surprise bill. In both cases, you may owe real tax on stock you
         can't sell.""")
         h = title("The tax on the spread", size=52)
-        nl = NumberLine(x_range=[0, 7, 1], length=10, color=DIM).shift(DOWN * 0.2)
+        nl = NumberLine(x_range=[0, 7, 1], length=10, color=DIM).shift(UP * 0.1)
         nl.add(*[T(f"${v}", size=26, color=DIM).next_to(nl.n2p(v), DOWN, buff=0.2) for v in range(0, 8)])
         s_ = Dot(nl.n2p(2.5), color=YELLOW_, radius=0.12)
         s_l = T("strike $2.50", size=28, color=YELLOW_).next_to(s_, UP, buff=0.5)
         f_ = Dot(nl.n2p(6), color=GREEN_, radius=0.12)
         f_l = T("409A today $6", size=28, color=GREEN_).next_to(f_, UP, buff=0.5)
         br = BraceBetweenPoints(nl.n2p(2.5), nl.n2p(6), direction=UP).shift(UP * 0.2)
-        spread = T("spread $3.50 × 10,000 = $35,000", size=34, weight=BOLD).next_to(br, UP, buff=1.0)
+        spread = T("spread $3.50 × 10,000 = $35,000", size=34, weight=BOLD).next_to(br, UP, buff=0.8)
         cmp = VGroup(
             card(["NSO", "$35K taxed as income", "the year you exercise"], width=5.6, color=ORANGE_, size=28),
             card(["ISO", "no regular tax now", "but counts toward AMT"], width=5.6, color=YELLOW_, size=28),
@@ -223,13 +254,81 @@ class Ch2Cash(NarratedScene):
         self.wait(min(8, max(0.1, self.left() / 5)))
         self.play(GrowFromCenter(br), FadeIn(spread))
         self.wait(min(10, max(0.1, self.left() / 3)))
-        self.play(VGroup(nl, s_, s_l, f_, f_l, br, spread).animate.shift(UP * 0.9), FadeIn(cmp))
+        self.play(FadeIn(cmp))
+        self.done()
+        self.clear_all()
+
+        # ---- worked example: your bank account ----
+        self.say("""Let's put the whole thing together with your bank account on screen.
+        Say you've been at the company two years, you have ten thousand vested options at
+        a two fifty strike, the current four oh nine A value is six dollars, and you have
+        sixty thousand dollars in savings. You decide to exercise all ten thousand.""")
+        h = title("Worked example: what leaves your bank account", size=44)
+        facts = VGroup(
+            T("10,000 vested options", size=30),
+            T("strike $2.50", size=30, color=YELLOW_),
+            T("409A value today $6", size=30, color=GREEN_),
+            T("NSOs, ~35% combined tax rate", size=30, color=DIM),
+        ).arrange(DOWN, aligned_edge=LEFT, buff=0.25).to_edge(LEFT, buff=0.7).shift(DOWN * 0.2)
+        bal = ValueTracker(60000)
+        acct_box = RoundedRectangle(corner_radius=0.2, width=5.6, height=2.3, stroke_color=BLUE_,
+                                    stroke_width=4, fill_color=BLUE_, fill_opacity=0.08)
+        acct_box.to_edge(RIGHT, buff=0.7).shift(UP * 0.6)
+        acct_lbl = T("your savings", size=30, color=DIM).next_to(acct_box.get_top(), DOWN, buff=0.25)
+        acct_val = always_redraw(lambda: T(f"${bal.get_value():,.0f}", size=64, weight=BOLD,
+                                           color=FG).move_to(acct_box).shift(DOWN * 0.25))
+        self.play(Write(h))
+        self.play(LaggedStart(*[FadeIn(f, shift=RIGHT * 0.2) for f in facts], lag_ratio=0.3), run_time=2)
+        self.play(Create(acct_box), FadeIn(acct_lbl), FadeIn(acct_val))
+        self.done()
+
+        self.say("""First, the purchase. Ten thousand shares times two fifty is twenty five
+        thousand dollars. That leaves your account. Your savings drop from sixty thousand to
+        thirty five thousand.""")
+        l1 = T("− $25,000  strike", size=36, color=RED_).next_to(acct_box, DOWN, buff=0.4).align_to(acct_box, RIGHT)
+        self.play(FadeIn(l1, shift=UP * 0.2))
+        self.play(bal.animate.set_value(35000), run_time=2)
+        self.done()
+
+        self.say("""Second, the tax. The spread is six minus two fifty, three fifty a share,
+        so thirty five thousand dollars of income on paper. With N.S.O.s and a combined
+        tax rate around thirty five percent, that's roughly twelve thousand dollars of tax,
+        which the company withholds at exercise, or you pay in April. Your savings are now
+        about twenty three thousand.""")
+        l2 = T("− $12,250  tax on spread", size=36, color=ORANGE_).next_to(l1, DOWN, buff=0.25).align_to(acct_box, RIGHT)
+        self.play(FadeIn(l2, shift=UP * 0.2))
+        self.play(bal.animate.set_value(22750), run_time=2)
+        self.done()
+
+        self.say("""So you've spent about thirty seven thousand dollars of real money. What
+        do you have for it? Ten thousand shares, worth sixty thousand dollars on paper. But
+        you can't sell them, unless there's a tender offer, an allowed secondary sale, an
+        acquisition, or an I.P.O. If the company later fails, the shares go to zero, and
+        that thirty seven thousand is gone. If it becomes a big success, it might be the
+        best purchase you ever made. That's the whole bet, in your bank account.""")
+        self.play(FadeOut(facts))
+        got = card(["What you got", "10,000 shares", "$60,000 on paper", "can't sell yet"], width=5.0, color=GREEN_, size=30)
+        got.to_edge(LEFT, buff=0.7).shift(DOWN * 0.2)
+        spent = T("real cash spent: ~$37,250", size=38, color=RED_, weight=BOLD).to_edge(DOWN, buff=0.35)
+        self.play(FadeIn(got, shift=RIGHT * 0.2))
+        self.wait(min(12, max(0.1, self.left() / 2.5)))
+        self.play(FadeIn(spent, shift=UP * 0.2))
+        self.done()
+
+        self.say("""Two notes. With I.S.O.s instead, there's usually no withholding at
+        exercise, so only the twenty five thousand leaves your account that day, but the
+        thirty five thousand spread can trigger the A.M.T. when you file your taxes. And
+        notice that if you'd exercised back when the strike and the four oh nine A value
+        were the same, there'd have been no spread and no tax at all, just the twenty five
+        thousand. That's why timing matters so much, which is the next question.""")
         self.done()
         self.clear_all()
 
         self.say("""So when should you exercise? There are three common strategies. Option
         one, wait. If you stay until an acquisition or I.P.O., you can usually exercise and
-        sell at the same moment, never risking your own cash. This is what most people do.
+        sell at the same moment. The strike and the tax are paid out of the sale money, so
+        nothing ever leaves your bank account. That's called a cashless exercise, and it's
+        what most people do.
         Option two, exercise early. Some companies let you exercise before you've even
         vested, when the spread is zero. You then file something called an eighty three B
         election with the I.R.S. within thirty days, and there's no tax at exercise, and
