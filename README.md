@@ -9,6 +9,6 @@ Source is in `video/`. Each chapter is one Manim scene; narration is written inl
 ```bash
 pip install manim kokoro soundfile   # plus system espeak-ng and pango dev headers
 cd video
-./render.sh                          # 1080p30, every chapter
-python stitch.py 1080p30 build/ai-startups-full.mp4
+./render.sh                          # 720p30, every chapter
+python stitch.py 720p30 build/ai-startups-full.mp4
 ```
